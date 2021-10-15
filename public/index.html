@@ -6,6 +6,16 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
     <title><%= htmlWebpackPlugin.options.title %></title>
+    <style>
+      html{
+        -ms-overflow-style: none; /* for Internet Explorer, Edge */
+        scrollbar-width: none; /* for Firefox */
+        overflow-y: scroll;
+      }
+      html::-webkit-scrollbar {
+        display: none; /* for Chrome, Safari, and Opera */
+      }
+    </style>
   </head>
   <body>
     <noscript>
@@ -13,5 +23,24 @@
     </noscript>
     <div id="app"></div>
     <!-- built files will be auto injected -->
+    <div id="scripts"></div>
   </body>
+  <script src="<%= BASE_URL %>js/editor.js"></script>
+  <script src="<%= BASE_URL %>js/editor.checklist.js"></script>
+  <script src="<%= BASE_URL %>js/editor.code.js"></script>
+  <script src="<%= BASE_URL %>js/editor.delimiter.js"></script>
+  <script src="<%= BASE_URL %>js/editor.embed.js"></script>
+  <script src="<%= BASE_URL %>js/editor.header.js"></script>
+  <script src="<%= BASE_URL %>js/editor.html.js"></script>
+  <script src="<%= BASE_URL %>js/editor.image.js"></script>
+  <script src="<%= BASE_URL %>js/editor.inline-code.js"></script>
+  <script src="<%= BASE_URL %>js/editor.link.js"></script>
+  <script src="<%= BASE_URL %>js/editor.list.js"></script>
+  <script src="<%= BASE_URL %>js/editor.marker.js"></script>
+  <script src="<%= BASE_URL %>js/editor.personality.js"></script>
+  <script src="<%= BASE_URL %>js/editor.quote.js"></script>
+  <script src="<%= BASE_URL %>js/editor.table.js"></script>
+  <script src="<%= BASE_URL %>js/editor.underline.js"></script>
+  <script src="<%= BASE_URL %>js/editor.warning.js"></script>
+
 </html>
