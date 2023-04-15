@@ -31,6 +31,8 @@ export default class Chapter extends Vue {
 
   chapters: IChapter[] = defaultValue.chapters
 
+  directory :string|undefined = ''
+
   chapterId = 0
 
   showChapters = false
@@ -45,6 +47,7 @@ export default class Chapter extends Vue {
   public getChapters () :void {
     this.subscription = BookService.getBook().subscribe(
       (data:Book<IChapter>) => {
+        this.directory = data.directory
         this.chapters = data.chapters
         if (localStorage.getItem('chId') !== null) {
           console.log(localStorage.getItem('chId'))
@@ -58,6 +61,10 @@ export default class Chapter extends Vue {
   }
 
   public editChapter (index: number, chapter:IChapter) :void {
+    if (!this.directory) {
+      alert('Provide a Directory!!!')
+      return
+    }
     this.toggleChapters()
     const data = JSON.stringify(chapter.data)
     sendChapter(index, data)

@@ -122,6 +122,7 @@ export default class Book extends Vue {
   }
 
   public getJsonFile () :boolean {
+    this.$router.replace('/')
     LoaderService.sendLoader(true)
     var input = document.createElement('input')
     input.setAttribute('type', 'file')

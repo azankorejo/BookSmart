@@ -44,7 +44,8 @@ import { Chapter } from '@/interfaces/Chapter'
 import { Book } from '@/interfaces/Book'
 import { makeChaptersArrayObjects, getDate } from '../services/OutputService'
 import { Component, Vue, Prop, Emit } from 'vue-property-decorator'
-import { sendBook } from '@/services/BookService'
+import { BookService, sendBook } from '@/services/BookService'
+import { take } from 'rxjs/operators';
 @Component
 export default class Modal extends Vue {
     @Prop({ default: false }) open! :boolean
@@ -63,6 +64,7 @@ export default class Modal extends Vue {
     }
 
     public ObjectAsJson () :void{
+      this.$router.replace('/')
       const result = this.makeObject()
       sendBook(result)
       this.setDefault()

@@ -11,6 +11,7 @@ function downloadObjectAsJson (result: Book<Chapter>) :void {
   result.lastUpdatedAt = getDate()
   if(!result.directory) {
     alert('Provide a Directory!!!')
+    return;
   }
   const data = JSON.stringify(result, null, 2)
   const directory = result.directory
