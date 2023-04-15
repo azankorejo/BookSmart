@@ -9,11 +9,16 @@ import { Chapter } from '@/interfaces/Chapter'
 
 function downloadObjectAsJson (result: Book<Chapter>) :void {
   result.lastUpdatedAt = getDate()
+  if(!result.directory) {
+    alert('Provide a Directory!!!')
+  }
   const data = JSON.stringify(result, null, 2)
-  fs.writeFile('F:/Azan/books/' + result.name + '.json', data, function (err) :void {
+  const directory = result.directory
+  console.log(directory + '/' + result.name + '.json');
+  fs.writeFile(directory + '/' + result.name + '.json', data, function (err) :void {
     if (err) throw err
     const NOTIFICATION_TITLE = 'Booksmart - Success'
-    const NOTIFICATION_BODY = 'File Saved Successfully.'
+    const NOTIFICATION_BODY = result.name + '.json' + ' File Saved Successfully to ' + directory
     new Notification(NOTIFICATION_TITLE, { body: NOTIFICATION_BODY })
   })
   // const dataStr = 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(result))

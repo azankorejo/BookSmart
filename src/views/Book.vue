@@ -8,6 +8,13 @@
       Showcase Book
     </button>
     <p class="text-sm font-bold">Scroll left and right to select books</p>
+    <div class="path-form">
+      <button type="submit" v-if="!showPath" @click="showPath = true" class="z-50 text-white bg-green-400 py-1 px-3"> Add Path </button>
+      <form class="p-3" v-if="showPath">
+        <input type="text" id="path-input" v-model="directory" placeholder="Add Path" class="w-100 py-1">
+        <button type="submit" class="z-50 text-white bg-green-400 py-1 px-3" @click="sendPath()"> ✔ </button>
+      </form>
+    </div>
     <div class="scroll-done mx-20 mt-10">
       <div class="flex justify-center gap-x-4 items-center h-screen w-max">
         <div class="bg-gray-100 p-20 rounded-sm cursor-pointer" @click="toggleModal()">
@@ -44,6 +51,7 @@ import Chapter from '../components/Chapter.vue'
 import CustomChapterModal from '../components/CustomChapterModal.vue'
 import EditChapterModal from '../components/EditChapterModal.vue'
 import { LoaderService } from '../services/LoaderService'
+import { first } from 'rxjs/operators'
 @Component({
   components: {
     Modal,
@@ -59,6 +67,8 @@ export default class Book extends Vue {
     editChapterModal: any,
   };
 
+  showPath: boolean = false
+
   open = false
 
   subscription:any;
@@ -67,10 +77,26 @@ export default class Book extends Vue {
 
   color = ''
 
+  directory:string = ''
+
   mounted () :void {
     const book  = JSON.parse(localStorage.getItem('book') as any)
     if (book !== null) sendBook(book)
     this.getData()
+  }
+
+  public sendPath() {
+    if (!this.directory) {
+      return;
+    }
+    this.showPath = false
+    BookService.getBook().pipe(first()).subscribe(
+      (data:IBook<IChapter>) => {
+        let book =  data
+        data.directory = this.directory
+        sendBook(book)
+      }
+    )
   }
 
   public showcase () :void {
@@ -140,6 +166,9 @@ export default class Book extends Vue {
   -ms-overflow-style: none; /* for Internet Explorer, Edge */
   scrollbar-width: none; /* for Firefox */
   overflow-y: scroll;
+}
+.path-form {
+  margin-top: 1.7rem;
 }
 .scroll-done::-webkit-scrollbar {
   display: none; /* for Chrome, Safari, and Opera */

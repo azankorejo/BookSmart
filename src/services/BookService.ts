@@ -11,6 +11,7 @@ export const defaultValue =
       name: '',
       color: '',
       author: '',
+      directory: 'Downloads',
       isSaved: false,
       createdAt: '',
       lastUpdatedAt: '',

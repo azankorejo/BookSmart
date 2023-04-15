@@ -36,6 +36,9 @@ export default class Chapter extends Vue {
   showChapters = false
 
   mounted () :void {
+    if (this.$route.query.open === 'chapters') {
+      this.showChapters = true
+    }
     this.getChapters()
   }
 
@@ -63,6 +66,9 @@ export default class Chapter extends Vue {
 
   toggleChapters () :void {
     this.showChapters = !this.showChapters
+    if (!this.showChapters) {
+      this.$router.replace('/')
+    }
   }
 }
 </script>

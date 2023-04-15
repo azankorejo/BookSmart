@@ -1,6 +1,6 @@
 <template>
   <div>
-    <router-link to="/">Go back</router-link>
+    <router-link to="/?open=chapters">Go back</router-link>
     <Editor></Editor>
   </div>
 </template>
